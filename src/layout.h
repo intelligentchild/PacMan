@@ -6,7 +6,8 @@
 #include<memory>
 #include<vector>
 
-#include "agent.h"
+#include "pacman.h"
+#include "ghost.h"
 
 class Grid{
     public:
@@ -45,13 +46,14 @@ class Layout
         bool isFood(int x, int y) const;
         bool isCapsule(int x, int y);
         std::vector<std::pair<int, int>>& getCapsules();
-        std::vector<Agent>&  getAgents();
-        //TODO only let game state set wall
+        std::vector<Agent*>& getAgents();
+        std::vector<Direction> getLegalMoves(int x, int y);
+        
     private:
         std::shared_ptr<Grid> _wallgrid;
         std::unique_ptr<Grid> _foodgrid;
         std::vector<std::pair<int, int>> _capsules;
-        std::vector<Agent> _agents;
+        std::vector<Agent*> _agents;
         int _width, _height;
 };
 

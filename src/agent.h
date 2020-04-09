@@ -1,5 +1,9 @@
+#include "layout.h"
+
 #ifndef AGENT_H
 #define AGENT_H
+
+class Layout;
 
 enum AgentType{
     pacman,
@@ -10,20 +14,23 @@ enum Direction{
     north,
     east,
     south,
-    west
+    west,
+    stop
 };
 
 class Agent{
     public:
-        Agent(int x=0, int y=0, AgentType agentType=AgentType::ghost);
+        Agent(int x, int y, AgentType agentType, Layout* layout);
         bool isAlive() const;
         int getX() const;
         int getY() const;
         int getType() const;
-        void move(Direction direction);
+        Layout* getLayout() const;
+        virtual void move(Direction direction);
 
     private:
         AgentType _agentType;
+        Layout* _layout;
         bool _isAlive;
         int _x;
         int _y;

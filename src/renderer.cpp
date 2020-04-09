@@ -58,37 +58,39 @@ void Renderer::Render(Layout& layout) {
       }
     }
   }
+  
+  SDL_Rect halfBlock;
+  halfBlock.w=block.w/2;
+  halfBlock.h=block.w/2;
   // Draw Food
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xA5, 0x00, 0xFF);
   for(int x(0); x<layout.getWidth(); x++){
     for(int y(0); y<layout.getHeight(); y++){
       if(layout.isFood(x, y)){
-        block.x = x * block.w;
-        block.y = y * block.h;
-        SDL_RenderFillRect(sdl_renderer, &block);
+        halfBlock.x = x * block.w +halfBlock.w/2;
+        halfBlock.y = y * block.h +halfBlock.h/2;
+        SDL_RenderFillRect(sdl_renderer, &halfBlock);
       }
     }
   }
   // Draw Capsule
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xC0, 0xCB, 0xFF);
   for(std::pair<int, int>& caps: layout.getCapsules()){
-    block.x = caps.first * block.w;
-    block.y = caps.second * block.h;
-    SDL_RenderFillRect(sdl_renderer, &block);
+    halfBlock.x = caps.first * block.w + halfBlock.w/2 ;
+    halfBlock.y = caps.second * block.h + halfBlock.h/2;
+    SDL_RenderFillRect(sdl_renderer, &halfBlock);
   }
   // Draw Agents
-  for(Agent& agent: layout.getAgents()){
-    
-    if(agent.getType()==AgentType::pacman)  // pacman
+  for(Agent* agent: layout.getAgents()){
+    block.x = agent->getX() * block.w;
+    block.y = agent->getY() * block.h;
+    if(agent->getType()==AgentType::pacman) { // pacman
      SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0x00, 0xFF);
-    else                                    // ghost
-     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xC0, 0xCB, 0xFF);
-    block.x = agent.getX() * block.w;
-    block.y = agent.getY() * block.h;
+    }else{                                    // ghost
+      SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+    }
     SDL_RenderFillRect(sdl_renderer, &block);
   }
-
-
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer);

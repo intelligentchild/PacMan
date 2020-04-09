@@ -21,6 +21,6 @@ ELSE (${SDL2_LIBRARIES})
     pkg_check_modules(SDL2 REQUIRED sdl2)
 ENDIF (${SDL2_LIBRARIES})
 
-add_executable(PacManGame src/main.cpp src/game.cpp src/controller.cpp src/renderer.cpp src/layout.cpp src/gameState.cpp src/agent.cpp)
+add_executable(PacManGame src/main.cpp src/game.cpp src/controller.h src/renderer.cpp src/layout.cpp src/gameState.cpp src/agent.cpp src/pacman.cpp src/ghost.cpp)
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
 target_link_libraries(PacManGame ${SDL2_LIBRARIES})

@@ -2,6 +2,7 @@
 #include "controller.h"
 #include "game.h"
 #include "renderer.h"
+#include "pacman.h"
 
 int main() {
   constexpr std::size_t kFramesPerSecond{60};
@@ -15,7 +16,7 @@ int main() {
 
 
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  Controller controller;
+  Controller<Pacman> controller;
   Game game(filename);
   game.Run(controller, renderer, kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";

@@ -4,6 +4,11 @@
 #include <algorithm>
 
 #include "layout.h"
+#include "ghost.h"
+#include "pacman.h"
+
+class Pacman;
+class Ghost;
 
 enum class LayoutSymbol: char{
     wall = '%',
@@ -62,14 +67,14 @@ bool Layout::InitializeLayout(std::string filename){
             if(symb == 'o' ) { // capsule
                 _capsules.push_back(std::pair<int, int>(x,y));
             }else if(symb == 'P' ) { // pacman
-                Agent pacman(x, y, AgentType::pacman);
-                _agents.emplace_back(pacman);
+                Pacman* pacman = new Pacman(x, y, this);
+                _agents.push_back(pacman);
             }else if(symb == 'G' ) { // ghost
-                Agent ghost(x, y, AgentType::ghost);
-                _agents.emplace_back(ghost);
+                Ghost* ghost = new Ghost(x, y, this);
+                _agents.push_back(ghost);
             }else if(ghostSym.end() != std::find(ghostSym.begin(), ghostSym.end(), symb)) { //ghosts
-                Agent ghost(x, y, AgentType::ghost);
-                _agents.emplace_back(ghost);
+                Ghost* ghost = new Ghost(x, y, this);
+                _agents.push_back(ghost);
             }
         }std::cout<<std::endl;
     }
@@ -96,10 +101,18 @@ std::vector<std::pair<int, int>>& Layout::getCapsules() {
     return _capsules;
 }
 
-std::vector<Agent>& Layout::getAgents(){
+std::vector<Agent*>& Layout::getAgents(){
     return _agents;
 }
 
+std::vector<Direction> Layout::getLegalMoves(int x, int y){
+    std::vector<Direction> legalMoves;
+    if(!isWall(x,y+1)) legalMoves.push_back(Direction::north);
+    if(!isWall(x+1,y)) legalMoves.push_back(Direction::east);
+    if(!isWall(x,y-1)) legalMoves.push_back(Direction::south);
+    if(!isWall(x-1,y)) legalMoves.push_back(Direction::west);
+    return legalMoves;
+}
 
 // int main(){
 //     Layout layout;
