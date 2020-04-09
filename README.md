@@ -6,10 +6,10 @@ Pacman game I developed from for udacity Cpp Nanodegree capstone project.
 ##### Table of Contents 
 - [Introduction](#introduction)
     - [Keyboard Interaction](#keyboard-interaction)
-- [Dependencies](#dependencies)
+- [Dependencies](#dependencies-for-running-locally)
     - [Basic Build Instructions](#basic-build-instructions)
 - [Project Files](#project-files)
-- [Rubric Points](#rubric-points)
+- [Rubric Points](#rubic-points-addressed)
 
 ## Introduction
 Capstone project for [Udacity's C++ Nanodegree program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213) 
