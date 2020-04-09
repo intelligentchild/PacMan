@@ -1,5 +1,5 @@
 # CppND: Pacman game
-Pacman game I developed from for udacity Cpp Nanodegree capstone project.
+Pacman game I developed for udacity Cpp Nanodegree capstone project.
 
 ![Pacman Game gif](https://github.com/intelligentchild/PacMan/blob/master/pacman.gif)
 
@@ -52,60 +52,62 @@ The user can interact with the game using the following keys:
 
 ## Project Files
 
-### `src\`
+> ## `src\`
+
 ### `main.cpp`
-sets init game params and starts game
+[main.cpp](src/main.cpp) is the entry point for the game. It instaciates Game object, initializes and sets params and starts game by calling run function.
 
-###`game.h`
-	class holds and drives the whole game
-	It contains game state which has all state info
-###`game_impl.h`
-	contains definataion of run (since it is generic function)
-###`game.cpp`
-	defination of game class
+### `game.h` and `game.cpp`
+[game.h](src/game.h), [game.cpp](src/game.h)
+class handles main game loop. It contains game state as a member which has all state info.
+### `game_impl.h`
+contains definataion of `Game::Run`. It is a generic function that takes in generic controller.
 
-###`gameState.h`
-	Holds all state info
-	Idea is to seperate out game state so it can be stored or loaded
-	and be used for ai bot controller game as extension later on
-###`gameState.cpp`
-	contains all gamesate defination
+### `gameState.h` and `gameState.cpp`
+[gameState.h](src/gameState.h) and [gameState.cpp](src/gameState.cpp) Holds all game state info.
+Intiuition is to seperate out game state so it can be stored or loaded and be used for ai bot
+controller game as extension later on (future scope).
+This class has all function defination needed to interact with the state info.
 
-### `renderer.h`
-	this class is ment to hold all renderer related info
-###`renderer.cpp`
-	all object drawing on ui is handled in here
-	it takes layout as input and draws 
-	walls, food, capsule and agents
+### `renderer.h` and `renderer.cpp`
+[renderer.h](src/renderer.h) and [renderer.h](src/renderer.h)  class is ment to hold all renderer related functions.
+This class takes Layout class as input, which contains all elements on map and renders it on ui.
+Elements are walls, food, capsule and agents.
 
-### `laout.h`
-	holds all info as a map
-	grid class is used to encapsulate and hold info about each cell
-	capsule is stored as list since they are few
-	has vector of pointer to agents giving access to all agents location
-layout.cpp
-	has map loading funtion and all other function to access members
+### `layout.h` and `layout.cpp`
+[layout.h](src/layout.h) and [layout.cpp](src/layout.cpp) contains all elements and thier location on map.
+Grid class is used to encapsulate and hold info about each cell. It is used to store food data and wall data.
+Capsule is stored as vector of pair,  since they are few This saves space.
+It also has vector of pointer to all agents, giving access to all agents location.
+This class also defines map loading funtion to read map data from file.
+It also defines collide function that handles pacmans collision with other objects(read #pacman section). 
 
-### `agent.h`
-	this is base class which encapsulates agent info
-	location of agent. It also defines how agent can move
-	It accesses layout to query legal position and moves
-### `agent.cpp`
-	contains all defination
+### `agent.h` and `agent.cpp`
+[agent.h](src/agent.h) and [agent.h](src/agent.h) This is a base class which encapsulates agents basic info like
+co-ordinates, type of agent, is alive. It also defines function to move agents. It does this by quering the layout
+if action is legal or not.
 
-### `controller.h`, `controller_impl.h`
-Controller class handles input using keyboard input
-VotController class gives random input
+### `controller.h` and `controller_impl.h`
+[controller.h](src/controller.h) and [controller_impl.h](src/controller_impl.h), Controller class is 
+a generic class that takes an agent as parameter and controlles it. There are 2 controllers defined in here. 
+`Controller` class handles input by reading keyboard input. While  
+`BotController` class gives random input from possible legal moves.
+More controllers can be defined to use ai to control agents(future scope)
 
-### `pacman.h`, `pacman.cpp`
-Inherits from agent class and defines pacman specific behaviour
-While moving on map
+### `pacman.h` and `pacman.cpp`
+[pacman.h](src/pacman.h) and [pacman.cpp](src/pacman.cpp) This class inherits from `Agent` class and defines pacman 
+specific behaviour. It calls collide function on `layout` class which handles its collission with all other objects
+on map. This collision function is supposed to handle pacmans consumption of food and capsules and collision with ghosts.
 
-### `ghost.h`,`ghost.cpp`
-Inherits from agent class and defines pacman specific behaviour
+### `ghost.h` and`ghost.cpp`
+[ghost.h](src/ghost.h) and [ghost.cpp](src/ghost.cpp) class inherits from agent class and defines ghost specific behaviour.
+It handles logic of if it hits pacman it kills it. But if scare time is running then it dies.
 
-### `layouts/`
+
+> ## `layouts/`
 This folder contains bunch of pacman maps
+
+
 
 ## Rubic Points addressed
 below are the rubic pints that are addressed/implemented in this project.
@@ -130,10 +132,9 @@ Templates generalize functions in the project.| [game](src/game_impl.h) and [con
 ### Memory Management
 | Rubric point  | Location |
 | ------------- | ------------- |
-| The project makes use of references in function declarations.  |   []()
-The project uses destructors appropriately. | []()
+| The project makes use of references in function declarations.  |   [pacman.cpp](src/pacman.cpp) Pacman::HandleCollision(GameState& gameState)
+The project uses destructors appropriately. | [layout.cpp](src/layout.cpp) Grid class
 The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate. | Yes, check all the files
-The project uses move semantics to move data, instead of copying it, where possible. | []()
 
 
 ## References
