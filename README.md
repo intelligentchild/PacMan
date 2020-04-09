@@ -8,6 +8,7 @@ Pacman game I developed for udacity Cpp Nanodegree capstone project.
     - [Keyboard Interaction](#keyboard-interaction)
 - [Dependencies](#dependencies-for-running-locally)
     - [Basic Build Instructions](#basic-build-instructions)
+- [Testing the implementation](#testing-the-implementation)
 - [Project Files](#project-files)
 - [Rubric Points](#rubic-points-addressed)
 
@@ -103,11 +104,14 @@ on map. This collision function is supposed to handle pacmans consumption of foo
 [ghost.h](src/ghost.h) and [ghost.cpp](src/ghost.cpp) class inherits from agent class and defines ghost specific behaviour.
 It handles logic of if it hits pacman it kills it. But if scare time is running then it dies.
 
+## `debug.h`
 
 > ## `layouts/`
 This folder contains bunch of pacman maps
 
-
+## Testing the implementation
+to turn on debug logs change macro in [debug.h](src/debug.h) 
+from `#define DEBUG(x) ` to `#define DEBUG(x) x`
 
 ## Rubic Points addressed
 below are the rubic pints that are addressed/implemented in this project.
