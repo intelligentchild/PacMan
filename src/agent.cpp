@@ -1,8 +1,14 @@
 
+#include "debug.h"
 #include "agent.h"
 
+int Agent::_agentCount=0;
+
 Agent::Agent(int x, int y, AgentType agentType, Layout* layout):
-    _x(x),_y(y), _agentType(agentType),_isAlive(true), _layout(layout){
+    _x(x),_y(y), _agentType(agentType),_isAlive(true), _layout(layout), _id(_agentCount++){
+}
+Agent::~Agent(){
+    DEBUG(std::cout<<"destroying object "<<( (getType()==AgentType::pacman)?"pacman":"ghost")<<" agent:"<< getId()<<std::endl;)
 }
 
 void Agent::move(Direction direction) {
@@ -39,13 +45,15 @@ void Agent::move(Direction direction) {
     }
 }
 bool Agent::killSelf(){
-    std::cout<<"killing:"<<std::endl;
+    std::cout<<"killing  "<<( (getType()==AgentType::pacman)?"pacman":"ghost")<<" agent:"<< getId()<<std::endl;
     if(isAlive()){
         _isAlive=false;
         return true;
     }
     return false;
 }
+
+int Agent::getId() const {return _id; }
 bool Agent::isAlive() const {return _isAlive; }
 bool Agent::isScareTime() const { return _isScareTime;}
 int Agent::getX() const { return _x;}

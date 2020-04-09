@@ -1,4 +1,4 @@
-
+#include "debug.h"
 #ifndef LAYOUT_H
 #define LAYOUT_H
 
@@ -17,6 +17,7 @@ class Grid{
                 _matrix[i]=new bool[_width];
         }
         ~Grid(){
+            DEBUG(std::cout<<"destroying grid"<<std::endl;)
             for(int i(0); i<_height; i++)
                 delete[] _matrix[i];
         }

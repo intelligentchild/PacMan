@@ -20,18 +20,19 @@ class GameState
 {
     public:
         GameState();
+        ~GameState();
         int getScore() const;
         Layout& getLayout();
-        Pacman* getPacman();
-        std::vector<Ghost*>& getGhosts();
+        std::unique_ptr<Pacman>& getPacman();
+        std::vector<std::unique_ptr<Ghost>>& getGhosts();
         void Initialize(std::string filename);
 
         void HandleCollision(Pacman* agent);
         
     private:
         Layout _layout;
-        Pacman* _pacman;
-        std::vector<Ghost*> _ghosts;
+        std::unique_ptr<Pacman> _pacman;
+        std::vector<std::unique_ptr<Ghost>> _ghosts;
         long _score;
 };
 

@@ -21,10 +21,12 @@ enum Direction{
 class Agent{
     public:
         Agent(int x, int y, AgentType agentType, Layout* layout);
+        ~Agent();
         bool isAlive() const;
         int getX() const;
         int getY() const;
         int getType() const;
+        int getId() const;
         bool isScareTime() const;
         Layout* getLayout() const;
         bool killSelf();
@@ -38,6 +40,9 @@ class Agent{
         bool _isAlive;
         int _x;
         int _y;
+        int _id;
+
+        static int _agentCount;
 };
 
 #endif

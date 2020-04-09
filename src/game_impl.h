@@ -23,13 +23,13 @@ void Game::Run(Controller<T> const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     // slow down bot from moving very fast
     if (frame_start - update_timestamp >= 200) {
-      Pacman *pacman = _gameState.getPacman();
+      Pacman *pacman = _gameState.getPacman().get();
       controller.HandleInput(_running, pacman);
 
       pacman->HandleCollision(_gameState);
 
-      for(Ghost* agent: _gameState.getGhosts()){
-        botController.HandleInput(agent);
+      for(std::unique_ptr<Ghost>& agent: _gameState.getGhosts()){
+        botController.HandleInput(agent.get());
       }
       update_timestamp = frame_start;
     }
