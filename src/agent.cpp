@@ -38,8 +38,16 @@ void Agent::move(Direction direction) {
         break;
     }
 }
-
+bool Agent::killSelf(){
+    std::cout<<"killing:"<<std::endl;
+    if(isAlive()){
+        _isAlive=false;
+        return true;
+    }
+    return false;
+}
 bool Agent::isAlive() const {return _isAlive; }
+bool Agent::isScareTime() const { return _isScareTime;}
 int Agent::getX() const { return _x;}
 int Agent::getY() const { return _y;}
 int Agent::getType() const { return _agentType;}

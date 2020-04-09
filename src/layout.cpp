@@ -89,10 +89,39 @@ bool Layout::isFood(int x, int y) const {
     return _foodgrid->isActive(x, y);
 }
 
+int Layout::foodCount() const{
+    int count=0;
+    for(int y(0); y<_height; y++){
+        for(int x(0); x<_width; x++){
+            if(isFood(x,y)) count++;
+        }
+    }
+    count+=_capsules.size();
+    return count;
+}
+
 bool Layout::isCapsule(int x, int y) {
     for(std::pair<int, int> &capsule: _capsules){
         if(capsule.first==x && capsule.second==y)
             return true;
+    }
+    return false;
+}
+
+bool Layout::consumeFood(int x, int y){
+    if(isFood(x,y)){
+        _foodgrid->setValue(x,y,false);
+        return true;
+    }
+    return false;
+}
+
+bool Layout::consumeCapsule(int x, int y){
+    for(auto capsuleIt=_capsules.begin(); capsuleIt!=_capsules.end(); ++capsuleIt){
+        if(capsuleIt->first==x && capsuleIt->second==y){
+            _capsules.erase(capsuleIt);
+            return true;    
+        }
     }
     return false;
 }

@@ -9,6 +9,13 @@
 #include "pacman.h"
 #include "ghost.h"
 
+
+enum Score{
+    capsule=2,
+    food=30,
+    ghostKill=200
+};
+
 class GameState
 {
     public:
@@ -18,6 +25,8 @@ class GameState
         Pacman* getPacman();
         std::vector<Ghost*>& getGhosts();
         void Initialize(std::string filename);
+
+        void HandleCollision(Pacman* agent);
         
     private:
         Layout _layout;

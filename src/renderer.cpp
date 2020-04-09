@@ -82,14 +82,19 @@ void Renderer::Render(Layout& layout) {
   }
   // Draw Agents
   for(Agent* agent: layout.getAgents()){
-    block.x = agent->getX() * block.w;
-    block.y = agent->getY() * block.h;
-    if(agent->getType()==AgentType::pacman) { // pacman
-     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0x00, 0xFF);
-    }else{                                    // ghost
-      SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+    if(agent->isAlive()){
+      block.x = agent->getX() * block.w;
+      block.y = agent->getY() * block.h;
+      if(agent->getType()==AgentType::pacman) { // pacman
+          SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0x00, 0xFF);
+      }else{                                    // ghost
+        if(agent->isScareTime())
+          SDL_SetRenderDrawColor(sdl_renderer, 0xEE, 0xEE, 0xEE, 0xFF);
+        else
+          SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+      }
+      SDL_RenderFillRect(sdl_renderer, &block);
     }
-    SDL_RenderFillRect(sdl_renderer, &block);
   }
 
   // Update Screen

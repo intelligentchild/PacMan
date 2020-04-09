@@ -44,7 +44,10 @@ class Layout
         bool InitializeLayout(std::string filename);
         bool isWall(int x, int y) const;
         bool isFood(int x, int y) const;
+        int foodCount() const;
         bool isCapsule(int x, int y);
+        bool consumeFood(int x, int y);
+        bool consumeCapsule(int x, int y);
         std::vector<std::pair<int, int>>& getCapsules();
         std::vector<Agent*>& getAgents();
         std::vector<Direction> getLegalMoves(int x, int y);

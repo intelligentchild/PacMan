@@ -25,9 +25,13 @@ class Agent{
         int getX() const;
         int getY() const;
         int getType() const;
+        bool isScareTime() const;
         Layout* getLayout() const;
+        bool killSelf();
         virtual void move(Direction direction);
 
+    protected:
+        bool _isScareTime;
     private:
         AgentType _agentType;
         Layout* _layout;
