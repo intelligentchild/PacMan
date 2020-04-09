@@ -1,6 +1,8 @@
 # Pacman
 Pacman game I developed from scratch for udacity cpp nano degree capstone project.
 I used https://github.com/udacity/CppND-Capstone-Snake-Game as starter code.
+
+
 ![Pacman Game gif](https://github.com/intelligentchild/PacMan/blob/master/pacman.gif)
 
 ## Dependencies for Running Locally
