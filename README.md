@@ -53,7 +53,7 @@ The user can interact with the game using the following keys:
 
 ## Project Files
 
-> ## `src\`   *Source files are in this folder*
+> ## `src/`   *Source files are in this folder*
 
 ### `main.cpp`
 [main.cpp](src/main.cpp) is the entry point for the game. It instaciates Game object, initializes and sets params and starts game by calling run function.
